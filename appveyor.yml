@@ -1,28 +1,9 @@
 environment:
   APP_VERSION: '2.2'
   matrix:
-    - PYTHON_VER: C:\Python27
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      SETUP_COMPILER_FLAG: --compiler=mingw32
-      ARCH_BITS: 32
-    - PYTHON_VER: C:\Python35
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-      SETUP_COMPILER_FLAG:
-      ARCH_BITS: 32
-    - PYTHON_VER: C:\Python37
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      SETUP_COMPILER_FLAG:
-      ARCH_BITS: 32
+
     - PYTHON_VER: C:\Python37-x64
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      SETUP_COMPILER_FLAG:
-      ARCH_BITS: 64
-    - PYTHON_VER: C:\Python39
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-      SETUP_COMPILER_FLAG:
-      ARCH_BITS: 32
-    - PYTHON_VER: C:\Python39-x64
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       SETUP_COMPILER_FLAG:
       ARCH_BITS: 64
 
@@ -49,7 +30,19 @@ after_build:
 artifacts:
   - path: miniupnpc*-$(appveyor_build_version).zip
     name: miniupnpc binaries
+
   - path: miniupnpc/dist/miniupnpc-*.whl
     name: miniupnpc python wheel (self-contained)
+
   - path: miniupnpc/dist/miniupnpc-*.egg
     name: miniupnpc python egg (self-contained)
+
+deploy_script:
+  - ps: |
+      if($env:APPVEYOR_REPO_TAG -eq 'true') {
+        Write-Output ("Deploying " + $env:APPVEYOR_REPO_TAG_NAME + " to PyPI...")
+        &"${Env:PYTHON}/python.exe" -m pip install twine
+        &"${Env:PYTHON}/python.exe" -m twine upload -u ${Env:USER} -p ${Env:PASS} --skip-existing dist/\*.whl dist/\*.zip
+      } else {
+        Write-Output "No tag for deployment"
+      }
