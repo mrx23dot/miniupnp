@@ -1,12 +1,10 @@
 environment:
   APP_VERSION: '2.2'
   matrix:
-
-    - PYTHON_VER: C:\Python37-x64
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    - PYTHON_VER: C:\Python36-x64
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
       SETUP_COMPILER_FLAG:
       ARCH_BITS: 64
-
 
 version: '$(APP_VERSION).{build}'
 
