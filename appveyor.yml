@@ -9,7 +9,7 @@ environment:
   # for pypi/twine
   USER: 'mrx23dot'
   PASS:
-    secure: 'PZ1+AhPdq2dHq+mV3l5BKg=='
+    secure: 'dBm6KX6qkLRKmz98VShiTUhn8lLwOn+Y3INBEaGkE4E='
 
   matrix:
     - PYTHON_VER: C:\Python37-x64
@@ -22,8 +22,8 @@ version: '$(APP_VERSION).{build}'
 install:
   - set PATH=%PYTHON_VER%;%PYTHON_VER%\Scripts;%PATH%;C:\msys64\mingw%ARCH_BITS%\bin
   # We need wheel installed to build wheels
-  - "%PYTHON_VER%\\python.exe -m pip install wheel"
-  - echo "using twine login %USER%  %PASS%"
+  - %PYTHON_VER%\\python.exe -m pip install wheel
+  - echo "using twine login %USER% %PASS%"
   - echo %PATH%
   - cc -v
 
@@ -49,5 +49,5 @@ artifacts:
 
 deploy_script:
   - appveyor AddCompilationMessage "Deploying to PyPI"
-  - "%PYTHON_VER%\\python.exe -m pip install twine"
-  - "%PYTHON_VER%\\python.exe -m twine upload -u %USER% -p %PASS% --skip-existing dist/*.whl dist/*.egg"
+  - %PYTHON_VER%\\python.exe -m pip install twine
+  - %PYTHON_VER%\\python.exe -m twine upload -u %USER% -p %PASS% --skip-existing dist/*.whl dist/*.egg
