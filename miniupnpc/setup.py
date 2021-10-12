@@ -33,7 +33,7 @@ setup(name='miniupnpc',
          Extension(name='miniupnpc', sources=['src/miniupnpcmodule.c'],
                    include_dirs=['include'], extra_objects=EXT)
       ],
-      scripts=['bin/miniupnpc.dll'],
+      scripts=['miniupnpc.dll'],
       )
 
 #      scripts=glob('*.exe') + glob('*.dll') + glob('*.a') + glob('*.lib'),
