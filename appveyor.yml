@@ -42,8 +42,13 @@ artifacts:
   - path: miniupnpc/dist/miniupnpc-*.egg
     name: miniupnpc python egg (self-contained)
 
+environment:
+  USER: user1
+  PASS:
+    secure: PZ1+AhPdq2dHq+mV3l5BKg==
+
 deploy_script:
   - ps: |
-      Write-Output ("Deploying " + $env:APPVEYOR_REPO_TAG_NAME + " to PyPI...")
-      &"${Env:PYTHON}/python.exe" -m pip install twine
-      &"${Env:PYTHON}/python.exe" -m twine upload -u ${Env:USER} -p ${Env:PASS} --skip-existing dist/*.whl dist/*.egg
+      Write-Output ("Deploying " + %APPVEYOR_REPO_TAG_NAME% + " to PyPI...")
+      - "%PYTHON_VER%\\python.exe -m pip install twine"
+      - "%PYTHON_VER%\\python.exe -m pip twine upload -u ${Env:USER} -p ${Env:PASS} --noninteractive --skip-existing dist/*.whl dist/*.egg"

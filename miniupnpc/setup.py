@@ -12,7 +12,6 @@ from setuptools import setup, Extension
 from setuptools.command import build_ext
 import subprocess
 import os
-from glob import glob
 
 EXT = ['build/libminiupnpc.a']
 
@@ -33,8 +32,9 @@ setup(name='miniupnpc',
          Extension(name='miniupnpc', sources=['src/miniupnpcmodule.c'],
                    include_dirs=['include'], extra_objects=EXT)
       ],
-      scripts=['miniupnpc.dll'],
       )
 
+# deploying scripts didn't work
+#      scripts=['miniupnpc.dll'],
 #      scripts=glob('*.exe') + glob('*.dll') + glob('*.a') + glob('*.lib'),
 # Specifying the files to distribute: https://docs.python.org/3/distutils/sourcedist.html#manifest
