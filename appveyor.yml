@@ -5,6 +5,12 @@
 
 environment:
   APP_VERSION: '2.2'
+
+  # for pypi/twine
+  USER: user1
+  PASS:
+    secure: PZ1+AhPdq2dHq+mV3l5BKg==
+
   matrix:
 
     - PYTHON_VER: C:\Python37-x64
@@ -41,11 +47,6 @@ artifacts:
 
   - path: miniupnpc/dist/miniupnpc-*.egg
     name: miniupnpc python egg (self-contained)
-
-environment:
-  USER: user1
-  PASS:
-    secure: PZ1+AhPdq2dHq+mV3l5BKg==
 
 deploy_script:
   - ps: |
