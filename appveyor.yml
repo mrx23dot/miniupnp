@@ -49,7 +49,6 @@ artifacts:
     name: miniupnpc python egg (self-contained)
 
 deploy_script:
-  - ps: |
-      Write-Output ("Deploying to PyPI...")
-      - "%PYTHON_VER%\\python.exe -m pip install twine"
-      - "%PYTHON_VER%\\python.exe -m pip twine upload -u ${Env:USER} -p ${Env:PASS} --noninteractive --skip-existing dist/*.whl dist/*.egg"
+  - appveyor AddCompilationMessage "Deploying to PyPI"
+  - "%PYTHON_VER%\\python.exe -m pip install twine"
+  - "%PYTHON_VER%\\python.exe -m pip twine upload -u ${Env:USER} -p ${Env:PASS} --noninteractive --skip-existing dist/*.whl dist/*.egg"
