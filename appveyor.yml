@@ -1,4 +1,7 @@
-# tutorial: https://packaging.python.org/guides/supporting-windows-using-appveyor/
+# tutorial:
+# https://packaging.python.org/tutorials/packaging-projects/
+# https://packaging.python.org/guides/supporting-windows-using-appveyor/
+# https://stackoverflow.com/questions/45630032/valueerror-no-pkg-info-in-archive
 
 environment:
   APP_VERSION: '2.2'
@@ -43,4 +46,4 @@ deploy_script:
   - ps: |
       Write-Output ("Deploying " + $env:APPVEYOR_REPO_TAG_NAME + " to PyPI...")
       &"${Env:PYTHON}/python.exe" -m pip install twine
-      &"${Env:PYTHON}/python.exe" -m twine upload -u ${Env:USER} -p ${Env:PASS} --skip-existing dist/\*.whl dist/\*.zip
+      &"${Env:PYTHON}/python.exe" -m twine upload -u ${Env:USER} -p ${Env:PASS} --skip-existing dist/*.whl dist/*.egg

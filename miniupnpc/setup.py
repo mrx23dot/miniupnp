@@ -20,7 +20,7 @@ class make_then_build_ext(build_ext.build_ext):
             subprocess.check_call([os.environ.get('MAKE', 'make')] + EXT)
             build_ext.build_ext.run(self)
 
-setup(name="miniupnpc2",
+setup(name="miniupnpc",
       version=open('VERSION').read().strip(),
       author='Thomas BERNARD',
       author_email='miniupnp@free.fr',
