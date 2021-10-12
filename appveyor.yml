@@ -22,7 +22,7 @@ version: '$(APP_VERSION).{build}'
 install:
   - set PATH=%PYTHON_VER%;%PYTHON_VER%\Scripts;%PATH%;C:\msys64\mingw%ARCH_BITS%\bin
   # We need wheel installed to build wheels
-  - %PYTHON_VER%\\python.exe -m pip install wheel
+  - '%PYTHON_VER%\\python.exe -m pip install wheel'
   - echo "using twine login %USER% %PASS%"
   - echo %PATH%
   - cc -v
@@ -49,5 +49,5 @@ artifacts:
 
 deploy_script:
   - appveyor AddCompilationMessage "Deploying to PyPI"
-  - %PYTHON_VER%\\python.exe -m pip install twine
-  - %PYTHON_VER%\\python.exe -m twine upload -u %USER% -p %PASS% --skip-existing dist/*.whl dist/*.egg
+  - '%PYTHON_VER%\\python.exe -m pip install twine'
+  - '%PYTHON_VER%\\python.exe -m twine upload -u %USER% -p %PASS% --skip-existing dist/*.whl dist/*.egg'
