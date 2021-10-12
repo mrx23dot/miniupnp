@@ -50,6 +50,6 @@ artifacts:
 
 deploy_script:
   - ps: |
-      Write-Output ("Deploying " + %APPVEYOR_REPO_TAG_NAME% + " to PyPI...")
+      Write-Output ("Deploying to PyPI...")
       - "%PYTHON_VER%\\python.exe -m pip install twine"
       - "%PYTHON_VER%\\python.exe -m pip twine upload -u ${Env:USER} -p ${Env:PASS} --noninteractive --skip-existing dist/*.whl dist/*.egg"
