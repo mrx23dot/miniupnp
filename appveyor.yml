@@ -7,10 +7,9 @@ environment:
   APP_VERSION: '2.2'
 
   # for pypi/twine
-  USER: user1
+  USER: 'mrx23dot'
   PASS:
-    secure: PZ1+AhPdq2dHq+mV3l5BKg==
-
+    secure: 'PZ1+AhPdq2dHq+mV3l5BKg=='
   matrix:
 
     - PYTHON_VER: C:\Python37-x64
@@ -51,4 +50,4 @@ artifacts:
 deploy_script:
   - appveyor AddCompilationMessage "Deploying to PyPI"
   - "%PYTHON_VER%\\python.exe -m pip install twine"
-  - "%PYTHON_VER%\\python.exe -m twine upload -u ${Env:USER} -p ${Env:PASS} --skip-existing dist/*.whl dist/*.egg"
+  - "%PYTHON_VER%\\python.exe -m twine upload -u $(USER) -p $(PASS) --skip-existing dist/*.whl dist/*.egg"
